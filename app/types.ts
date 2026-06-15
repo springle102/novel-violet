@@ -1,0 +1,49 @@
+// ===========================
+// Data Models
+// ===========================
+
+export interface Story {
+  id: string;
+  title: string;
+  author: string;
+  coverImageUrl: string | null;
+  rating: number;
+  chapterCount: number;
+  slug?: string;
+}
+
+export interface User {
+  id: string;
+  displayName: string;
+  avatarUrl: string | null;
+}
+
+// ===========================
+// Component Props
+// ===========================
+
+export interface HeaderProps {
+  isLoggedIn: boolean;
+  user?: User | null;
+  onLogin?: () => void;
+  onLogout?: () => void;
+  onSearch?: (query: string) => void;
+}
+
+export interface StoryCardProps {
+  coverImageUrl: string | null;
+  title: string;
+  author: string;
+  rating: number;
+  chapterCount: number;
+}
+
+export interface StoryGridProps {
+  stories: Story[];
+}
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}

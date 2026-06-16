@@ -175,7 +175,7 @@ export default function Header({
           <div className="drop-shadow-[0_0_6px_rgba(192,132,252,0.4)] group-hover:drop-shadow-[0_0_10px_rgba(192,132,252,0.7)] transition-all duration-300">
             <Image 
               src={logoImg} 
-              alt="Novel Violet Logo" 
+              alt="Trạm Chữ Novel Logo" 
               width={200}
               height={75}
               className="object-contain"

@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Express Server Entry Point
+// Trạm Chữ Novel — Express Server Entry Point
 // ============================================================
 // Khởi tạo server Express với đầy đủ middleware:
 // - CORS (cho phép frontend gọi API)
@@ -10,7 +10,7 @@
 // ============================================================
 
 // Load biến môi trường từ .env TRƯỚC KHI import bất kỳ module nào
-require("dotenv").config();
+require("dotenv").config({ path: require('path').resolve(__dirname, '../.env') });
 
 const express = require("express");
 const cors = require("cors");
@@ -105,7 +105,7 @@ async function start() {
 
     app.listen(PORT, () => {
       console.log(`\n========================================`);
-      console.log(`  Novel Violet API Server`);
+      console.log(`  Trạm Chữ Novel API Server`);
       console.log(`  Port:     ${PORT}`);
       console.log(`  Mode:     ${process.env.NODE_ENV || "development"}`);
       console.log(`  Database: ${process.env.DB_NAME || "Violet_db"}`);

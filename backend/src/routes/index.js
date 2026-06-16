@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Central Route Index
+// Trạm Chữ Novel — Central Route Index
 // ============================================================
 // Gom tất cả route modules vào 1 file.
 // Server.js chỉ cần import file này.

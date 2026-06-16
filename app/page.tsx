@@ -131,7 +131,7 @@ export default function Home() {
             <div className="flex items-center gap-3 text-sm text-text-muted">
               <Image 
                 src={logoImg} 
-                alt="Novel Violet Logo" 
+                alt="Trạm Chữ Novel Logo" 
                 width={140}
                 height={44}
                 className="object-contain"
@@ -140,7 +140,7 @@ export default function Home() {
               <span>— Đọc truyện tiểu thuyết online</span>
             </div>
             <p className="text-xs text-text-light">
-              © 2026 Novel Violet. All rights reserved.
+              © 2026 Trạm Chữ Novel. All rights reserved.
             </p>
           </div>
         </div>

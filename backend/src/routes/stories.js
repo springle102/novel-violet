@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Stories Routes
+// Trạm Chữ Novel — Stories Routes
 // ============================================================
 // Định nghĩa các route cho resource /api/stories
 // Mỗi route map tới 1 controller function tương ứng.

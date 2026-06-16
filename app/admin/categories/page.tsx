@@ -130,7 +130,7 @@ export default function AdminCategoriesPage() {
       {/* Title */}
       <div className="lg:col-span-3">
         <h1 className="text-2xl font-bold text-gray-800">Quản lý Thể loại</h1>
-        <p className="text-sm text-gray-500 mt-1">Cấu hình danh mục và phân loại tác phẩm của Novel Violet.</p>
+        <p className="text-sm text-gray-500 mt-1">Cấu hình danh mục và phân loại tác phẩm của Trạm Chữ Novel.</p>
       </div>
 
       {/* Add Category Form (1/3 column) */}

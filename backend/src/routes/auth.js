@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Auth Routes
+// Trạm Chữ Novel — Auth Routes
 // ============================================================
 // Định nghĩa các route cho xác thực người dùng.
 // POST /api/auth/register — Đăng ký tài khoản mới

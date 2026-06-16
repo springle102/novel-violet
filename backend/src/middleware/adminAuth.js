@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Admin Authentication Middleware
+// Trạm Chữ Novel — Admin Authentication Middleware
 // ============================================================
 // Xác thực JWT token và phân quyền truy cập admin panel.
 // - verifyToken: Giải mã token, gắn user vào req

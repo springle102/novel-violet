@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Database Connection (Connection Pool)
+// Trạm Chữ Novel — Database Connection (Connection Pool)
 // ============================================================
 // Sử dụng pg.Pool để quản lý connection pool, giúp chịu tải
 // read-heavy tốt hơn so với tạo connection mới cho mỗi request.

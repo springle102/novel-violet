@@ -165,7 +165,7 @@ export default function AdminCommentsPage() {
         <div className="space-y-1">
           <h2 className="text-base font-bold text-gray-850">Quyền bình luận độc giả (Toàn hệ thống)</h2>
           <p className="text-xs text-gray-500">
-            Cho phép bật hoặc tắt khả năng viết bình luận của tất cả độc giả trên toàn hệ thống Novel Violet.
+            Cho phép bật hoặc tắt khả năng viết bình luận của tất cả độc giả trên toàn hệ thống Trạm Chữ Novel.
           </p>
         </div>
         

@@ -12,7 +12,7 @@ export async function fetchAdmin(endpoint: string, options?: RequestInit) {
   });
   if (!res.ok) {
     const errorData = await res.json().catch(() => ({}));
-    throw new Error(errorData.message || `Request failed with status ${res.status}`);
+    throw new Error(errorData.error || errorData.message || `Request failed with status ${res.status}`);
   }
   return res.json();
 }

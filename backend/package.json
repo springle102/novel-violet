@@ -1,7 +1,7 @@
 {
   "name": "novel-violet-backend",
   "version": "1.0.0",
-  "description": "Novel Violet — Backend API Server (Node.js + Express + PostgreSQL)",
+  "description": "Trạm Chữ Novel — Backend API Server (Node.js + Express + PostgreSQL)",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

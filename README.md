@@ -1,6 +1,6 @@
-# 🌸 Novel Violet — Nền Tảng Đọc & Chia Sẻ Tiểu Thuyết Trực Tuyến
+# 🌸 Trạm Chữ Novel — Nền Tảng Đọc & Chia Sẻ Tiểu Thuyết Trực Tuyến
 
-Chào mừng bạn đến với **Novel Violet** — một hệ thống Web Application hiện đại dành cho độc giả yêu thích tiểu thuyết online và các tác giả tự do mong muốn xuất bản tác phẩm của mình. Dự án được phát triển theo kiến trúc tách biệt rõ ràng giữa **Frontend (Client)** và **Backend (API Server)**, đảm bảo khả năng mở rộng, tối ưu hóa truy vấn dữ liệu hiệu quả cao.
+Chào mừng bạn đến với **Trạm Chữ Novel** — một hệ thống Web Application hiện đại dành cho độc giả yêu thích tiểu thuyết online và các tác giả tự do mong muốn xuất bản tác phẩm của mình. Dự án được phát triển theo kiến trúc tách biệt rõ ràng giữa **Frontend (Client)** và **Backend (API Server)**, đảm bảo khả năng mở rộng, tối ưu hóa truy vấn dữ liệu hiệu quả cao.
 
 ---
 

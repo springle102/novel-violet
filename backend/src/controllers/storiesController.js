@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Stories Controller
+// Trạm Chữ Novel — Stories Controller
 // ============================================================
 // Chứa business logic cho các API endpoint liên quan đến Stories.
 // Tách riêng khỏi routes để dễ test và maintain.
@@ -80,7 +80,7 @@ async function getAllStories(req, res, next) {
 // ────────────────────────────────────────────────────────────
 // Lấy danh sách truyện mới cập nhật nhất.
 // Query params: ?page=1&limit=10
-// Sử dụng covering index idx_stories_latest_covering → Index-Only Scan
+// ORDER BY updated_at DESC sử dụng idx_stories_updated_at_desc
 // ────────────────────────────────────────────────────────────
 async function getLatestStories(req, res, next) {
   try {
@@ -314,8 +314,8 @@ async function createStory(req, res, next) {
     try {
       await client.query('BEGIN');
       const insertQuery = `
-        INSERT INTO stories (id, author_id, title, slug, cover_image, description, status)
-        VALUES ($1, $2, $3, $4, $5, $6, $7)
+        INSERT INTO stories (id, author_id, title, slug, cover_image, description, status, category_id)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING id, title, slug, status, created_at
       `;
 
@@ -327,6 +327,7 @@ async function createStory(req, res, next) {
         coverImage || null,
         description || null,
         status || "ongoing",
+        (categoryIds && categoryIds.length > 0) ? categoryIds[0] : null
       ]);
 
       if (categoryIds && Array.isArray(categoryIds) && categoryIds.length > 0) {

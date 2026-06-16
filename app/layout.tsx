@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
-  let siteName = "Novel Violet";
+  let siteName = "Trạm Chữ Novel";
   let description = "Nền tảng đọc truyện tiểu thuyết online miễn phí.";
   let faviconUrl = "/favicon.ico"; // Fallback
   

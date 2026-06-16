@@ -316,7 +316,7 @@ export default function AdminAuthorsPage() {
                 <h3 className="text-lg font-bold text-gray-800">
                   Tác phẩm của tác giả: <span className="text-purple-600 font-extrabold">{viewingAuthor.username}</span>
                 </h3>
-                <p className="text-xs text-gray-500 mt-0.5">Danh sách các truyện được xuất bản bởi tác giả này trên Novel Violet.</p>
+                <p className="text-xs text-gray-500 mt-0.5">Danh sách các truyện được xuất bản bởi tác giả này trên Trạm Chữ Novel.</p>
               </div>
               <button
                 onClick={() => setViewingAuthor(null)}

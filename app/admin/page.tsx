@@ -140,7 +140,7 @@ export default function AdminDashboardPage() {
       {/* Welcome Message */}
       <div>
         <h1 className="text-2xl font-bold text-gray-800">Xin chào quay trở lại!</h1>
-        <p className="text-sm text-gray-500 mt-1">Dưới đây là tóm tắt hoạt động hệ thống của Novel Violet.</p>
+        <p className="text-sm text-gray-500 mt-1">Dưới đây là tóm tắt hoạt động hệ thống của Trạm Chữ Novel.</p>
       </div>
 
       {isAdmin && adminData ? (

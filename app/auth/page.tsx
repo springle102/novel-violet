@@ -667,7 +667,7 @@ export default function AuthPage() {
               <div className="relative w-48 h-16 drop-shadow-[0_0_8px_rgba(192,132,252,0.5)] group-hover:drop-shadow-[0_0_12px_rgba(192,132,252,0.8)] transition-all duration-300">
                 <Image 
                   src={logoImg} 
-                  alt="Novel Violet Logo" 
+                  alt="Trạm Chữ Novel Logo" 
                   fill
                   sizes="200px"
                   className="object-contain"
@@ -1030,7 +1030,7 @@ export default function AuthPage() {
 
           {/* Footer */}
           <p className="mt-6 text-center text-xs text-purple-400/50">
-            © 2026 Novel Violet. Tất cả quyền được bảo lưu.
+            © 2026 Trạm Chữ Novel. Tất cả quyền được bảo lưu.
           </p>
         </div>
       </div>

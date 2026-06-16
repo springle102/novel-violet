@@ -155,7 +155,6 @@ CREATE INDEX IF NOT EXISTS idx_stories_author_id ON stories (author_id);
 CREATE INDEX IF NOT EXISTS idx_stories_status ON stories (status);
 CREATE INDEX IF NOT EXISTS idx_stories_category_id ON stories (category_id);
 CREATE INDEX IF NOT EXISTS idx_stories_title_trgm ON stories USING gin (title gin_trgm_ops);
-CREATE INDEX IF NOT EXISTS idx_stories_latest_covering ON stories (updated_at DESC) INCLUDE (id, title, slug, cover_image, category_id, author_id, rating, chapter_count);
 
 -- ────────────────────────────────────────────────────────────
 -- 5.1. BẢNG CHAPTERS
@@ -348,7 +347,7 @@ ON CONFLICT (email) DO NOTHING;
 
 -- Chèn cấu hình hệ thống mặc định
 INSERT INTO site_settings (key, value, description) VALUES
-('site_name', 'Novel Violet', 'Tên website'),
+('site_name', 'Trạm Chữ Novel', 'Tên website'),
 ('site_description', 'Đọc truyện tiểu thuyết online', 'Mô tả website'),
 ('favicon_url', 'https://placehold.co/32x32/8b5cf6/white?text=NV', 'Favicon của website'),
 ('maintenance_mode', 'false', 'Chế độ bảo trì'),

@@ -95,7 +95,7 @@ export default function AdminLoginPage() {
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Quay lại trang chủ Novel Violet
+            Quay lại trang chủ Trạm Chữ Novel
           </a>
         </div>
 
@@ -108,7 +108,7 @@ export default function AdminLoginPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
               </svg>
             </div>
-            <h1 className="text-2xl font-bold text-white tracking-wide">Novel Violet</h1>
+            <h1 className="text-2xl font-bold text-white tracking-wide">Trạm Chữ Novel</h1>
             <p className="text-xs text-purple-400 mt-1 uppercase tracking-widest font-semibold">Cổng quản trị hệ thống</p>
           </div>
 

@@ -205,7 +205,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </svg>
           </div>
           <div>
-            <h2 className="font-bold text-white leading-tight">Novel Violet</h2>
+            <h2 className="font-bold text-white leading-tight">Trạm Chữ Novel</h2>
             <span className="text-[10px] bg-purple-600/30 text-purple-300 font-semibold px-2 py-0.5 rounded-full border border-purple-500/20 uppercase tracking-widest">
               {isAdmin ? 'Admin' : 'Tác giả'}
             </span>

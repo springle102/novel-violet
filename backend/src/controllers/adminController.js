@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Admin Controller
+// Trạm Chữ Novel — Admin Controller
 // ============================================================
 // Xử lý logic nghiệp vụ cho admin panel.
 // Bao gồm: Dashboard, Stories, Users, Categories, Comments, Settings
@@ -364,8 +364,8 @@ async function toggleCommentPermission(req, res, next) {
 async function getCategories(req, res, next) {
   try {
     const result = await db.query(
-      `SELECT c.id, c.name, c.slug, COUNT(s.id) as story_count
-       FROM categories c LEFT JOIN stories s ON s.category_id = c.id
+      `SELECT c.id, c.name, c.slug, COUNT(sc.story_id) as story_count
+       FROM categories c LEFT JOIN story_categories sc ON sc.category_id = c.id
        GROUP BY c.id, c.name, c.slug ORDER BY c.name ASC`
     );
     res.json({ success: true, data: result.rows });
@@ -749,7 +749,7 @@ function generateSlug(text) {
     è: "e", é: "e", ẻ: "e", ẽ: "e", ẹ: "e", ê: "e", ế: "e", ề: "e", ể: "e", ễ: "e", ệ: "e",
     ì: "i", í: "i", ỉ: "i", ĩ: "i", ị: "i",
     ò: "o", ó: "o", ỏ: "o", õ: "o", ọ: "o", ô: "o", ố: "o", ồ: "o", ổ: "o", ỗ: "o", ộ: "o", ơ: "o", ớ: "o", ờ: "o", ở: "o", ỡ: "o", ợ: "o",
-    ù: "u", ú: "u", ủ: "u", ũ: "u", cụ: "u", ư: "u", ứ: "u", ừ: "u", ử: "u", ữ: "u", ự: "u",
+    ù: "u", ú: "u", ủ: "u", ũ: "u", ụ: "u", ư: "u", ứ: "u", ừ: "u", ử: "u", ữ: "u", ự: "u",
     ỳ: "y", ý: "y", ỷ: "y", ỹ: "y", ỵ: "y", đ: "d",
     À: "a", Á: "a", Ả: "a", Ã: "a", Ạ: "a", Ă: "a", Ắ: "a", Ằ: "a", Ả: "a", Ẵ: "a", Ặ: "a", Â: "a", Ấ: "a", Ầ: "a", Ẩ: "a", Ẫ: "a", Ậ: "a",
     È: "e", É: "e", Ẻ: "e", Ẽ: "e", Ẹ: "e", Ê: "e", Ế: "e", Ề: "e", Ể: "e", Ễ: "e", Ệ: "e",
@@ -789,8 +789,8 @@ async function createStory(req, res, next) {
     try {
       await client.query('BEGIN');
       const insertStoryQuery = `
-        INSERT INTO stories (author_id, title, slug, cover_image, description, status)
-        VALUES ($1, $2, $3, $4, $5, $6)
+        INSERT INTO stories (author_id, title, slug, cover_image, description, status, category_id)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING id, title, slug, status, created_at
       `;
       const storyRes = await client.query(insertStoryQuery, [
@@ -799,7 +799,8 @@ async function createStory(req, res, next) {
         finalSlug,
         coverImage || null,
         description || null,
-        status || 'ongoing'
+        status || 'ongoing',
+        (categoryIds && categoryIds.length > 0) ? categoryIds[0] : null
       ]);
       const storyId = storyRes.rows[0].id;
 
@@ -858,8 +859,8 @@ async function updateStory(req, res, next) {
       await client.query('BEGIN');
       const updateStoryQuery = `
         UPDATE stories
-        SET title = $1, cover_image = $2, description = $3, status = $4, slug = $5
-        WHERE id = $6
+        SET title = $1, cover_image = $2, description = $3, status = $4, slug = $5, category_id = $6
+        WHERE id = $7
         RETURNING id, title, slug, status, updated_at
       `;
       const storyRes = await client.query(updateStoryQuery, [
@@ -868,6 +869,7 @@ async function updateStory(req, res, next) {
         description || null,
         status || 'ongoing',
         finalSlug,
+        (categoryIds && categoryIds.length > 0) ? categoryIds[0] : null,
         id
       ]);
 

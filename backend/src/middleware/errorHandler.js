@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Error Handler Middleware
+// Trạm Chữ Novel — Error Handler Middleware
 // ============================================================
 // Middleware xử lý lỗi tập trung. Đặt cuối cùng trong middleware chain.
 // Express nhận ra đây là error handler nhờ 4 tham số (err, req, res, next).

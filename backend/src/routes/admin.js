@@ -1,5 +1,5 @@
 // ============================================================
-// Novel Violet — Admin Routes
+// Trạm Chữ Novel — Admin Routes
 // ============================================================
 // Định tuyến API cho admin panel.
 // Tất cả routes yêu cầu xác thực JWT + quyền author hoặc admin.

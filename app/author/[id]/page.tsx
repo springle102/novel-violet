@@ -8,6 +8,8 @@ import Header from "@/app/components/Header";
 import type { User } from "@/app/types";
 import Link from "next/link";
 
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 interface AuthorProfile {
   id: string;
   pen_name: string;
@@ -168,7 +170,7 @@ export default function AuthorProfilePage() {
             <h1 className="text-2xl font-extrabold text-purple-950">
               {author.pen_name}
             </h1>
-            
+
             <p className="mt-2 text-sm text-gray-500 max-w-2xl leading-relaxed">
               {author.bio || "Tác giả hiện tại chưa cập nhật tiểu sử giới thiệu."}
             </p>

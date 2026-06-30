@@ -16,7 +16,8 @@ const AVATAR_TEMPLATES = [
   { id: 5, name: "Kiếm khách lãng du", url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&q=80" },
   { id: 6, name: "Đại pháp sư", url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&q=80" }
 ];
-
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 export default function ProfilePage() {
   const router = useRouter();
 
@@ -24,7 +25,7 @@ export default function ProfilePage() {
   const [mounted, setMounted] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  
+
   const [displayName, setDisplayName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("https://images.unsplash.com/photo-1578632767115-351597cf2477?w=150&h=150&fit=crop&q=80");
   const [username, setUsername] = useState("");
@@ -36,11 +37,11 @@ export default function ProfilePage() {
   const [tempUsername, setTempUsername] = useState("");
   const [tempEmail, setTempEmail] = useState("");
   const [tempPassword, setTempPassword] = useState("");
-  
+
   const [showEditModal, setShowEditModal] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [isSaving, setIsSaving] = useState(false);
-  
+
   // ── Real Bookshelf State from DB ──
   const [bookshelfStories, setBookshelfStories] = useState<any[]>([]);
   const [isLoadingBookshelf, setIsLoadingBookshelf] = useState(true);
@@ -131,7 +132,7 @@ export default function ProfilePage() {
         const parsed = JSON.parse(storedUser);
         setCurrentUser(parsed);
         setIsLoggedIn(true);
-        
+
         // Load info from db/storage format
         setDisplayName(parsed.displayName || parsed.fullName || "");
         setAvatarUrl(parsed.avatarUrl || "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=150&h=150&fit=crop&q=80");
@@ -153,8 +154,8 @@ export default function ProfilePage() {
   const totalStoriesRead = bookshelfStories.length;
   const totalStoriesFollowed = bookshelfStories.filter(s => s.status === 'ongoing').length;
   const totalChaptersRead = bookshelfStories.reduce((acc, book, idx) => {
-    const progressChapters = book.status === 'completed' 
-      ? book.chapterCount 
+    const progressChapters = book.status === 'completed'
+      ? book.chapterCount
       : Math.max(1, Math.round(book.chapterCount * (0.3 + (idx * 0.15) % 0.6)));
     return acc + progressChapters;
   }, 0);
@@ -230,7 +231,7 @@ export default function ProfilePage() {
     try {
       const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const token = localStorage.getItem("token");
-      
+
       // Attempt backend API call
       if (token && currentUser) {
         const res = await fetch(`${apiBaseUrl}/api/auth/profile`, {
@@ -376,7 +377,7 @@ export default function ProfilePage() {
 
         {/* ── Main Container ── */}
         <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 relative z-20">
-          
+
           {/* ── Title Heading ── */}
           <div className="mb-6 text-center">
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-wider text-white uppercase drop-shadow-[0_0_12px_rgba(192,132,252,0.4)]">
@@ -386,15 +387,14 @@ export default function ProfilePage() {
 
           {/* ── Main Card Container ── */}
           <div className="rounded-3xl border border-purple-500/20 bg-white/95 p-5 sm:p-6 shadow-xl shadow-purple-950/20 backdrop-blur-md">
-            
+
             {/* ── Alert Message ── */}
             {message && (
-              <div 
-                className={`mb-5 rounded-2xl border px-4 py-3 text-sm flex items-center justify-between ${
-                  message.type === "success" 
-                    ? "bg-emerald-50 border-emerald-200 text-emerald-800" 
-                    : "bg-rose-50 border-rose-200 text-rose-800"
-                }`}
+              <div
+                className={`mb-5 rounded-2xl border px-4 py-3 text-sm flex items-center justify-between ${message.type === "success"
+                  ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                  : "bg-rose-50 border-rose-200 text-rose-800"
+                  }`}
               >
                 <span>{message.text}</span>
                 <button onClick={() => setMessage(null)} className="font-bold opacity-60 hover:opacity-100">✕</button>
@@ -403,7 +403,7 @@ export default function ProfilePage() {
 
             {/* ── Top Section (Info & Stats) ── */}
             <div className="flex flex-col gap-5 sm:gap-6 md:flex-row md:items-center">
-              
+
               {/* Avatar Column */}
               <div className="flex flex-col items-center gap-3 shrink-0">
                 <div className="relative">
@@ -411,9 +411,9 @@ export default function ProfilePage() {
                   <div className="absolute inset-0 -m-1.5 rounded-full bg-gradient-to-tr from-purple-50 via-pink-400 to-purple-500 animate-spin" style={{ animationDuration: "10s" }} />
                   {/* Avatar wrapper */}
                   <div className="relative h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full border-4 border-white bg-purple-50 shadow-md">
-                    <img 
-                      src={avatarUrl} 
-                      alt="Avatar độc giả" 
+                    <img
+                      src={avatarUrl}
+                      alt="Avatar độc giả"
                       className="h-full w-full object-cover"
                     />
                   </div>
@@ -475,22 +475,20 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   onClick={() => setActiveTab("bookshelf")}
-                  className={`pb-3 text-sm sm:text-base font-extrabold uppercase tracking-wide border-b-2 transition-all duration-200 ${
-                    activeTab === "bookshelf"
-                      ? "border-purple-600 text-purple-950"
-                      : "border-transparent text-purple-950/40 hover:text-purple-950/70"
-                  }`}
+                  className={`pb-3 text-sm sm:text-base font-extrabold uppercase tracking-wide border-b-2 transition-all duration-200 ${activeTab === "bookshelf"
+                    ? "border-purple-600 text-purple-950"
+                    : "border-transparent text-purple-950/40 hover:text-purple-950/70"
+                    }`}
                 >
                   Tủ Sách Cá Nhân
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveTab("reports")}
-                  className={`pb-3 text-sm sm:text-base font-extrabold uppercase tracking-wide border-b-2 transition-all duration-200 ${
-                    activeTab === "reports"
-                      ? "border-purple-600 text-purple-950"
-                      : "border-transparent text-purple-950/40 hover:text-purple-950/70"
-                  }`}
+                  className={`pb-3 text-sm sm:text-base font-extrabold uppercase tracking-wide border-b-2 transition-all duration-200 ${activeTab === "reports"
+                    ? "border-purple-600 text-purple-950"
+                    : "border-transparent text-purple-950/40 hover:text-purple-950/70"
+                    }`}
                 >
                   Báo Lỗi Của Tôi
                 </button>
@@ -512,21 +510,21 @@ export default function ProfilePage() {
                   <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
                     {/* Books from Database */}
                     {bookshelfStories.map((book, idx) => {
-                      const progressChapters = book.status === 'completed' 
-                        ? book.chapterCount 
+                      const progressChapters = book.status === 'completed'
+                        ? book.chapterCount
                         : Math.max(1, Math.round(book.chapterCount * (0.3 + (idx * 0.15) % 0.6)));
                       const percent = Math.round((progressChapters / book.chapterCount) * 100);
-                      
+
                       return (
-                        <div 
-                          key={book.id} 
+                        <div
+                          key={book.id}
                           className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:translate-y-[-3px] hover:shadow-md"
                         >
                           <div className="relative aspect-[2/3] w-full overflow-hidden bg-gray-100">
                             {book.coverImageUrl ? (
-                              <img 
-                                src={book.coverImageUrl} 
-                                alt={book.title} 
+                              <img
+                                src={book.coverImageUrl}
+                                alt={book.title}
                                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                               />
                             ) : (
@@ -548,11 +546,11 @@ export default function ProfilePage() {
                                 {book.status === 'completed' ? 'Đã hoàn thành' : 'Đang tiến hành'}
                               </span>
                             </div>
-                            
+
                             <div className="mt-2 space-y-1">
                               <div className="h-1.5 w-full rounded-full bg-purple-100 overflow-hidden">
-                                <div 
-                                  className="h-full bg-gradient-to-r from-purple-600 to-fuchsia-500 rounded-full" 
+                                <div
+                                  className="h-full bg-gradient-to-r from-purple-600 to-fuchsia-500 rounded-full"
                                   style={{ width: `${percent}%` }}
                                 />
                               </div>
@@ -648,7 +646,7 @@ export default function ProfilePage() {
           <div className="w-full max-w-lg rounded-3xl border border-purple-500/20 bg-white p-6 shadow-2xl animate-in fade-in zoom-in-95 duration-200 overflow-y-auto max-h-[90vh]">
             <div className="mb-4 flex items-center justify-between">
               <h3 className="text-xl font-extrabold text-purple-950 uppercase tracking-wide">Chỉnh sửa thông tin</h3>
-              <button 
+              <button
                 onClick={handleCancel}
                 className="rounded-full p-1.5 hover:bg-gray-100 text-gray-500 transition-colors"
               >
@@ -657,17 +655,17 @@ export default function ProfilePage() {
             </div>
 
             <form onSubmit={handleSaveChanges} className="space-y-4">
-              
+
               {/* Avatar Section */}
               <div className="flex flex-col items-center gap-3 py-3 border-b border-purple-100">
                 <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-purple-300 shadow-md">
-                  <img 
-                    src={tempAvatarUrl || avatarUrl} 
-                    alt="Preview avatar" 
+                  <img
+                    src={tempAvatarUrl || avatarUrl}
+                    alt="Preview avatar"
                     className="h-full w-full object-cover"
                   />
                 </div>
-                
+
                 {/* Choose Avatar Templates */}
                 <div className="w-full">
                   <span className="block text-xs font-bold text-purple-950/70 mb-2 text-center">Chọn ảnh mẫu hoặc tải ảnh của bạn:</span>
@@ -677,9 +675,8 @@ export default function ProfilePage() {
                         key={avatar.id}
                         type="button"
                         onClick={() => setTempAvatarUrl(avatar.url)}
-                        className={`h-9 w-9 overflow-hidden rounded-full border-2 transition-all hover:scale-105 ${
-                          tempAvatarUrl === avatar.url ? "border-purple-600 ring-2 ring-purple-500/20" : "border-transparent"
-                        }`}
+                        className={`h-9 w-9 overflow-hidden rounded-full border-2 transition-all hover:scale-105 ${tempAvatarUrl === avatar.url ? "border-purple-600 ring-2 ring-purple-500/20" : "border-transparent"
+                          }`}
                         title={avatar.name}
                       >
                         <img src={avatar.url} alt={avatar.name} className="h-full w-full object-cover" />

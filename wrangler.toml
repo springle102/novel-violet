@@ -1,0 +1,2 @@
+name = "tram-chu-novel"
+compatibility_flags = ["nodejs_compat"]

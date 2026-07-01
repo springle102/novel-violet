@@ -5,8 +5,6 @@ import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { getAdminUser, logoutAdmin, fetchAdmin } from './utils';
 import NotificationDropdown from './components/NotificationDropdown';
-export const runtime = 'edge';
-export const dynamic = 'force-dynamic';
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();

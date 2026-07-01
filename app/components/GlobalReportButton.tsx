@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import LoginModal from "./LoginModal";
+import dynamic from "next/dynamic";
+const LoginModal = dynamic(() => import("./LoginModal"), { ssr: false });
 
 export default function GlobalReportButton() {
   const pathname = usePathname();

@@ -8,8 +8,6 @@ import logoImg from "@/app/logo.png";
 // ===========================
 // Types
 // ===========================
-export const runtime = 'edge';
-export const dynamic = 'force-dynamic';
 interface FormErrors {
   fullName?: string;
   username?: string;

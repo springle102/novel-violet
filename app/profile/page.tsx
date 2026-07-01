@@ -16,8 +16,6 @@ const AVATAR_TEMPLATES = [
   { id: 5, name: "Kiếm khách lãng du", url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&q=80" },
   { id: 6, name: "Đại pháp sư", url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&q=80" }
 ];
-export const runtime = 'edge';
-export const dynamic = 'force-dynamic';
 export default function ProfilePage() {
   const router = useRouter();
 

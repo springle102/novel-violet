@@ -8,8 +8,6 @@ import Header from "@/app/components/Header";
 import type { User } from "@/app/types";
 import Link from "next/link";
 
-export const runtime = 'edge';
-export const dynamic = 'force-dynamic';
 interface AuthorProfile {
   id: string;
   pen_name: string;

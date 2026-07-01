@@ -1,74 +1,79 @@
 import { defineConfig, devices } from '@playwright/test';
-import path from 'path';
 
 /**
- * Playwright Configuration cho dự án Trạm Chữ Novel
- * 
- * Bao gồm 2 loại test:
- * 1. API Tests (Backend): Chạy trực tiếp qua HTTP requests, không cần browser
- * 2. E2E Tests (Frontend + Backend): Cần cả 2 servers chạy đồng thời
- * 
- * Biến môi trường cần thiết:
- *   BACKEND_URL    – URL của backend API (mặc định: http://localhost:5000)
- *   FRONTEND_URL   – URL của frontend Next.js (mặc định: http://localhost:3000)
- *   DATABASE_URL   – Connection string Neon DB (cần cho test DB/SSL)
- *   ADMIN_EMAIL    – Email admin để test login (mặc định: support.tramchunovel@gmail.com)
- *   ADMIN_PASSWORD – Mật khẩu admin (mặc định: 123456)
- *   CLOUDINARY_URL – URL Cloudinary SDK (cần cho test upload)
+ * Read environment variables from file.
+ * https://github.com/motdotla/dotenv
+ */
+// import dotenv from 'dotenv';
+// import path from 'path';
+// dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+/**
+ * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: false,       // Chạy tuần tự vì test có dependency thứ tự rủi ro
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 1 : 0,
-  workers: 1,                 // Chạy 1 worker vì test có trạng thái phụ thuộc lẫn nhau
-  reporter: [
-    ['html', { open: 'never' }],
-    ['list'],                  // In kết quả từng test ra console
-  ],
-  timeout: 60_000,            // 60s timeout mỗi test (Neon cold start có thể lâu)
-
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : undefined,
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: 'html',
+  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: process.env.FRONTEND_URL || 'http://localhost:3000',
+    /* Base URL to use in actions like `await page.goto('')`. */
+    // baseURL: 'http://localhost:3000',
+
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: true,
   },
 
+  /* Configure projects for major browsers */
   projects: [
-    // ── Project 1: API Tests (chỉ dùng request context, không cần browser) ──
     {
-      name: 'api-tests',
-      testMatch: /production-api\.spec\.ts/,
-      use: {
-        baseURL: process.env.BACKEND_URL || 'http://localhost:5000',
-      },
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
     },
-    // ── Project 2: E2E Browser Tests ──
+
     {
-      name: 'e2e-tests',
-      testMatch: /production-e2e\.spec\.ts/,
-      use: {
-        ...devices['Desktop Chrome'],
-        baseURL: process.env.FRONTEND_URL || 'http://localhost:3000',
-      },
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
     },
+
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
+
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
   ],
 
-  /* Tự động khởi động cả backend và frontend trước khi test */
-  // Uncomment khi muốn tự động khởi server:
-  // webServer: [
-  //   {
-  //     command: 'node src/server.js',
-  //     cwd: path.resolve(__dirname, 'backend'),
-  //     port: 5000,
-  //     reuseExistingServer: true,
-  //     timeout: 30_000,
-  //   },
-  //   {
-  //     command: 'npm run dev',
-  //     port: 3000,
-  //     reuseExistingServer: true,
-  //     timeout: 30_000,
-  //   },
-  // ],
+  /* Run your local dev server before starting the tests */
+  webServer: {
+     command: 'npm run start',
+     url: 'http://localhost:3000',
+     reuseExistingServer: !process.env.CI,
+   },
 });

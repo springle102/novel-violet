@@ -2,16 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import GlobalReportButton from "./components/GlobalReportButton";
 
-export const runtime = 'edge';
-export const dynamic = 'force-dynamic';
-
 export async function generateMetadata(): Promise<Metadata> {
   let siteName = "Trạm Chữ Novel";
   let description = "Nền tảng đọc truyện tiểu thuyết online miễn phí.";
   let faviconUrl = "/favicon.ico"; // Fallback
   
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/settings`, { cache: 'no-store' });
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/settings`, { next: { revalidate: 3600 } });
     if (res.ok) {
       const data = await res.json();
       if (data.success && Array.isArray(data.data)) {

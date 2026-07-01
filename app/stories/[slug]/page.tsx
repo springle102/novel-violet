@@ -6,7 +6,8 @@ import Link from "next/link";
 import Image from "next/image";
 import logoImg from "@/app/logo.png";
 import Header from "@/app/components/Header";
-import LoginModal from "@/app/components/LoginModal";
+import dynamic from "next/dynamic";
+const LoginModal = dynamic(() => import("@/app/components/LoginModal"), { ssr: false });
 import type { User } from "@/app/types";
 
 // ===========================
